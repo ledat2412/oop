@@ -1,0 +1,58 @@
+============================================
+|1.no.house                                |
+|2.booking                                 |
+|3.client                                  |
+|4.worker                                  |
+|5.print file                              |
+|0.exit                                    |
+============================================
+
+==================no.house==================
+|1.house-1 | address | in_use | client     |
+|2.house-2 | address | blank  | client     |
+|3.house-3 | address | in_use | client     |
+|4.house-4 | address | blank  | client     |
+|5.house-5 | address | in_use | client     |
+|------------------------------------------|
+|1.next page                               |
+|2.add house                               |
+|3.delete house                            |
+|0.exit                                    |
+============================================
+
+===================booking==================
+|1.id_client | time | al_purchase          |
+|2.id_client | time | in_purchase          |
+|3.id_client | time | al_purchase          |
+|4.id_client | time | in_purchase          |
+|5.id_client | time | al_purchase          |
+|------------------------------------------|
+|1.next page                               |
+|2.add client                              |
+|3.delete client                           |
+|0.exit                                    |
+============================================
+
+===================client===================
+|1.client_name                             |
+|2.                                        |
+|3.                                        |
+|4.                                        |
+|5.                                        |
+|------------------------------------------|
+|1.next page                               |
+|0.exit                                    |
+============================================
+
+===================worker===================
+|1.worker_name | cleaner                   |
+|2.worker_name | manager                   |
+|3.worker_name | advisory                  |
+|4.                                        |
+|5.                                        |
+|------------------------------------------|
+|1.next page                               |
+|2.add worker                              |
+|3.delete worker                           |
+|0.exit                                    |
+============================================

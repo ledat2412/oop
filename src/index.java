@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 import house.showoff.house;
-// menu + đặt nhà + nhà + người
 
 public class index {
     public static void main(String[] args) {

@@ -1,6 +1,8 @@
 import java.util.Scanner;
-
+import house.booking.Main2;
 import house.showoff.house;
+import people.client.Project;
+import people.slave.Main1;
 // menu + đặt nhà + nhà + người
 
 public class index {
@@ -24,13 +26,18 @@ public class index {
                     house.household(args);
                     break;
                 case 2:
-                    // nhap file vao
+                    Main2 booking = new Main2();
+                    booking.main(args);
                     break;
                 case 3:
-                    // nhap file vao
+                    Project client = new Project();
+                    client.main(args);
                     break;
                 case 4:
-                    // nhap file vao
+                    Main1 worker = new Main1();
+                    worker.main(args);
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("select invalid. Please select again!");

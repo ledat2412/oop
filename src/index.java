@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 import house.showoff.house;
+import house.showoff.filterfile;
+import people.slave.slavemenu;
 
 public class index {
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class index {
             System.out.println ("|2.booking                                                                                                                       |");
             System.out.println ("|3.client                                                                                                                        |");
             System.out.println ("|4.worker                                                                                                                        |");
-            System.out.println ("|5.print file                                                                                                                    |");
+            System.out.println ("|5.print reciept                                                                                                                 |");
             System.out.println ("|0.exit                                                                                                                          |");
             System.out.println ("==================================================================================================================================");
             int choice = sc.nextInt();
@@ -23,13 +25,15 @@ public class index {
                     house.household(args);
                     break;
                 case 2:
-                    // nhap file vao
+                    filterfile house2 = new filterfile();
+                    house2.showmenfilter();
                     break;
                 case 3:
                     // nhap file vao
                     break;
                 case 4:
-                    // nhap file vao
+                    slavemenu menu = new slavemenu();
+                    menu.showmenu();
                     break;
                 default:
                     System.out.println("select invalid. Please select again!");

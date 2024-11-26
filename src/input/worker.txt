@@ -1,1 +1,2 @@
-ma, hoten, sdt, ngay sinh, email, luong thong tin cv
+ma, hoten, sdt, ngay sinh, email, luong, thong tin cv
+Tiep Tan, 12305, Lê Nguyễn Đức Đạt, 0888239123, ledat241205@gmail.com, 1000000, infor cv

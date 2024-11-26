@@ -449,7 +449,7 @@ public void sua() {
     }
 }
 public class Main1 {
-    public static void main(String[] args) {
+    public void main() {
         Scanner scanner = new Scanner(System.in);
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         int luachon;
@@ -505,8 +505,6 @@ public class Main1 {
             }
 
         } while (luachon != 0);
-
-        scanner.close();
     }
 }
 

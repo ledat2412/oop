@@ -1,8 +1,6 @@
 import java.util.Scanner;
 import house.booking.Main2;
 import house.showoff.house;
-import house.showoff.filterfile;
-import people.slave.slavemenu;
 
 import people.client.Project;
 import people.slave.Main1;
@@ -38,7 +36,7 @@ public class index {
                     break;
                 case 4:
                     Main1 worker = new Main1();
-                    worker.main(args);
+                    worker.main();
                     break;
                 case 5:
                     break;

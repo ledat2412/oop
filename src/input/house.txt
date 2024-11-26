@@ -15,4 +15,3 @@ Quan 7, Eco Green, inuse
 Quan 9, Vinhomes Grand Park, inuse
 Quan Binh Thanh, Vinhomes Central Park, inuse
 Quan Thu Thiem, Opera Metropole, clear
-Huyen Ngu Hanh Son, Bill, clear

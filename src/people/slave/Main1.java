@@ -1,20 +1,32 @@
 package people.slave;
 import java.util.Scanner;
 import java.util.Arrays;
-
-// lop truu tuong nhan vien
-abstract class NhanVien {
+// tao bien tao switch sai set de lay
+// tao lop nhan vien la lop da hinh
+class NhanVien
+{
     private String Ma;
     private int Luong;
-
+    private String Hovaten;
+    private String Sodienthoai;
+    private String Ngaysinh;
+    private String Email;
     public NhanVien() {
         Ma = "";
+        Hovaten="";
+        Sodienthoai="";
+        Ngaysinh="";
+        Email="";
         Luong = 0;
         
     }
 
-    public NhanVien(String Ma, int Luong ) {
+    public NhanVien(String Ma, int Luong ,String Hovaten,String Ngaysinh,String Sodienthoai,String Email) {
         this.Ma = Ma;
+        this.Hovaten=Hovaten;
+        this.Sodienthoai=Sodienthoai;
+        this.Ngaysinh=Ngaysinh;
+        this.Email=Email;
         this.Luong = Luong;
        
     }
@@ -25,6 +37,39 @@ abstract class NhanVien {
 
     public void setMa(String Ma) {
         this.Ma = Ma;
+    }
+
+    public String getHovaten()
+    {
+        return Hovaten;
+    }
+    public void sethovaten(String Hovaten)
+    {
+        this.Hovaten=Hovaten;
+    }
+    public String getSodienthoai()
+    {
+        return Sodienthoai;
+    }
+    public void setsodienthoai(String Sodienthoai)
+    {
+        this.Sodienthoai=Sodienthoai;
+    }
+    public String getNgaysinh()
+    {
+        return Ngaysinh;
+    }
+    public void setngaysinh(String Ngaysinh)
+    {
+        this.Ngaysinh=Ngaysinh;
+    }
+    public String getEmail()
+    {
+        return Email;
+    }
+    public void setemail(String Email)
+    {
+        this.Email=Email;
     }
 
     public int getLuong() {
@@ -38,17 +83,27 @@ abstract class NhanVien {
    
     public void nhap() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nhap Luong Nhan Vien: ");
-        Luong = scanner.nextInt();
-        scanner.nextLine();  
-        
         System.out.print("Nhap Ma Nhan Vien: ");
         Ma = scanner.nextLine();
+        System.out.println("Nhap Ho va Ten Nhan Vien:");
+        Hovaten=scanner.nextLine();
+        System.out.println("Nhap So dien thoai cua Nhan Vien:");
+        Sodienthoai=scanner.nextLine();
+        System.out.println("Nhap Ngay sinh cua Nhan Vien:");
+        Ngaysinh=scanner.nextLine();
+        System.out.println("Nhap Email cua Nhan Vien:");
+        Email=scanner.nextLine();
+        System.out.println("Nhap Luong cua Nhan Vien:");
+        Luong=scanner.nextInt();
     }
 
     public void xuat() {
         System.out.println("Ma Nhan Vien: " + Ma);
-        System.out.println("Luong Nhan Vien: " + Luong+"đ");
+        System.out.println("Ho va ten Nhan Vien:"+Hovaten);
+        System.out.println("So dien thoai cua Nhan Vien:"+Sodienthoai);
+        System.out.println("Ngay sinh cua Nhan Vien:"+Ngaysinh);
+        System.out.println("Email cua Nhan Vien:"+Email);
+        System.out.println("Luong Nhan Vien: " + Luong+"VND");
         
     }
 }
@@ -62,8 +117,8 @@ class TiepTan extends NhanVien {
         Tuvan = "";
     }
 
-    public TiepTan(String Ma, int Luong, String Tuvan) {
-        super(Ma, Luong);
+    public TiepTan(String Ma, int Luong, String Tuvan,String Hovaten,String Sodienthoai,String Ngaysinh,String Email) {
+        super(Ma, Luong,Hovaten,Ngaysinh,Sodienthoai,Email);
         this.Tuvan = Tuvan;
     }
 
@@ -99,8 +154,8 @@ class LaoCong extends NhanVien {
         Dondep = "";
     }
 
-    public LaoCong(String Ma, int Luong, String Dondep) {
-        super(Ma, Luong);
+    public LaoCong(String Ma, int Luong, String Dondep,String Hovaten,String Ngaysinh,String Sodienthoai,String Email) {
+        super(Ma, Luong,Hovaten,Ngaysinh,Sodienthoai,Email);
         this.Dondep = Dondep;
     }
 
@@ -139,8 +194,8 @@ class NVQuanLy extends NhanVien
         Quanly = "";
     }
 
-    public NVQuanLy(String Ma, int Luong, String Quanly) {
-        super(Ma, Luong);
+    public NVQuanLy(String Ma, int Luong, String Quanly,String Hovaten,String Ngaysinh,String Sodienthoai,String Email) {
+        super(Ma, Luong,Hovaten,Ngaysinh,Sodienthoai,Email);
         this.Quanly = Quanly;
     }
 
@@ -282,27 +337,90 @@ public void them() {
         }
     }
 
-    // Hàm sửa thông tin nhân viên
-    public void sua() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Nhap ma nhan vien can sua: ");
-        String Ma = scanner.nextLine();
-        boolean found = false;
+    
+   // Hàm sửa thông tin nhân viên
+public void sua() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Nhap ma nhan vien can sua: ");
+    String Ma = scanner.nextLine();
+    boolean found = false;
 
-        for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMa().equals(Ma)) {
-                System.out.println("Nhap lai thong tin cho nhan vien co ma " + Ma + ":");
-                dsnv[i].nhap();
-                found = true;
-                System.out.println("Thong tin nhan vien da duoc cap nhat.");
-                break;
+    for (int i = 0; i < n; i++) {
+        if (dsnv[i].getMa().equals(Ma)) {
+            found = true;
+            System.out.println("Thong tin hien tai cua nhan vien:");
+            dsnv[i].xuat();
+            
+            System.out.println("Chon muc can sua:");
+           // System.out.println("1. Ma nhan vien");
+            System.out.println("1. Ho va ten");
+            System.out.println("2. So dien thoai");
+            System.out.println("3. Ngay sinh");
+            System.out.println("4. Email");
+            System.out.println("5. Luong");
+            if (dsnv[i] instanceof TiepTan) {
+                System.out.println("6. Cong viec tu van");
+            } else if (dsnv[i] instanceof LaoCong) {
+                System.out.println("6. Cong viec don dep");
+            } else if (dsnv[i] instanceof NVQuanLy) {
+                System.out.println("6. Cong viec quan ly");
             }
-        }
+            System.out.print("Lua chon: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Đọc dòng mới còn lại
 
-        if (!found) {
-            System.out.println("Khong tim thay nhan vien can sua.");
+            switch (choice) {
+               // case 1:
+                 //   System.out.print("Nhap ma moi: ");
+                   // dsnv[i].setMa(scanner.nextLine());
+                    //break;
+                case 1:
+                    System.out.print("Nhap ho va ten moi: ");
+                    dsnv[i].sethovaten(scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhap so dien thoai moi: ");
+                    dsnv[i].setsodienthoai(scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Nhap ngay sinh moi: ");
+                    dsnv[i].setngaysinh(scanner.nextLine());
+                    break;
+                case 4:
+                    System.out.print("Nhap email moi: ");
+                    dsnv[i].setemail(scanner.nextLine());
+                    break;
+                case 5:
+                    System.out.print("Nhap luong moi: ");
+                    dsnv[i].setLuong(scanner.nextInt());
+                    scanner.nextLine(); // Đọc dòng mới còn lại
+                    break;
+                case 6:
+                    if (dsnv[i] instanceof TiepTan) {
+                        System.out.print("Nhap cong viec tu van moi: "); //instanceof ktra xem bien i co trung voi cac lop con neu trung thi in ra lop con do
+                        ((TiepTan) dsnv[i]).setTuvan(scanner.nextLine());
+                    } else if (dsnv[i] instanceof LaoCong) {
+                        System.out.print("Nhap cong viec don dep moi: ");
+                        ((LaoCong) dsnv[i]).setDondep(scanner.nextLine());
+                    } else if (dsnv[i] instanceof NVQuanLy) {
+                        System.out.print("Nhap cong viec quan ly moi: ");
+                        ((NVQuanLy) dsnv[i]).setQuanly(scanner.nextLine());
+                    }
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le!");
+                    break;
+            }
+            System.out.println("Thong tin nhan vien da duoc cap nhat.");
+            break;
         }
     }
+
+    if (!found) {
+        System.out.println("Khong tim thay nhan vien can sua.");
+    }
+}
+
 
     // Hàm tìm kiếm nhân viên
     public void timKiem() {
@@ -347,29 +465,49 @@ public class Main1 {
             System.out.println("7. Dem so luong nhan vien");
             System.out.println("0. Thoat");
             System.out.print("Lua chon: ");
-            luachon = scanner.nextInt();
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-            if (luachon == 1) {
-                dsnv.nhap();
-            } else if (luachon == 2) {
-                dsnv.xuat();
-            } else if (luachon == 3) {
-                dsnv.them();
-            } else if (luachon == 4) {
-                dsnv.timKiem();
-            } else if (luachon == 5) {
-                dsnv.xoa();
-            } else if (luachon == 6) {
-                dsnv.sua();
-            } else if (luachon == 7) {
-                dsnv.dem();
-            } else if (luachon == 0) {
-                System.out.println("Ket thuc chuong trinh.");
-            } else {
-                System.out.println("Lua chon khong hop le.");
+            
+            // Kiểm tra nhập sai
+            while (!scanner.hasNextInt()) {
+                System.out.println("Lua chon khong hop le. Vui long nhap lai!");
+                scanner.next();
             }
+            luachon = scanner.nextInt();
+            scanner.nextLine(); // Đọc bỏ dòng trống
+
+            switch (luachon) {
+                case 1:
+                    dsnv.nhap();
+                    break;
+                case 2:
+                    dsnv.xuat();
+                    break;
+                case 3:
+                    dsnv.them();
+                    break;
+                case 4:
+                    dsnv.timKiem();
+                    break;
+                case 5:
+                    dsnv.xoa();
+                    break;
+                case 6:
+                    dsnv.sua();
+                    break;
+                case 7:
+                    dsnv.dem();
+                    break;
+                case 0:
+                    System.out.println("Ket thuc chuong trinh.");
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le!");
+                    break;
+            }
+
         } while (luachon != 0);
+
+        scanner.close();
     }
 }
+
 

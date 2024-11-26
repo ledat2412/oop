@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import house.booking.Main2;
 import house.showoff.house;
+import house.showoff.filterfile;
+import people.slave.slavemenu;
+
 import people.client.Project;
 import people.slave.Main1;
 // menu + đặt nhà + nhà + người
@@ -14,7 +17,7 @@ public class index {
             System.out.println ("|2.booking                                                                                                                       |");
             System.out.println ("|3.client                                                                                                                        |");
             System.out.println ("|4.worker                                                                                                                        |");
-            System.out.println ("|5.print file                                                                                                                    |");
+            System.out.println ("|5.print reciept                                                                                                                 |");
             System.out.println ("|0.exit                                                                                                                          |");
             System.out.println ("==================================================================================================================================");
             int choice = sc.nextInt();

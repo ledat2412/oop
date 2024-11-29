@@ -3,7 +3,7 @@ import house.booking.BookingMenu;
 import house.showoff.house;
 import people.slave.readfile;
 import people.client.Project;
-import people.slave.Main1;
+import people.slave.Worker;
 
 public class index {
     public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class index {
                     client.main();
                     break;
                 case 4:
-                    Main1 worker = new Main1();
+                    Worker worker = new Worker;();
                     worker.main();
                     break;
                 case 5:

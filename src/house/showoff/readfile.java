@@ -29,10 +29,10 @@ public class readfile {
             int districtWidth = 38;
             int conditionWidth = 10;
 
-            System.out.println(String.format("| %-" + indexWidth + "s| %-" + nameWidth + "s| %-" + districtWidth + "s|" + " %-" + conditionWidth + "s|", "No.", "Name", "District", "Condition"));
+            System.out.println(String.format("| %-" + indexWidth + "s| %-" + nameWidth + "s| %-" + districtWidth + "s| %-" + conditionWidth + "s|", "No.", "Name", "District", "Condition"));
 
             for (int i = 0; i < lineCount; i++) {
-                System.out.println(String.format("| %-" + indexWidth + "s| %-" + nameWidth + "s| %-" + districtWidth + "s|" + " %-" + conditionWidth + "s|", (i + 1), names[i], districts[i], condition[i]));
+                System.out.println(String.format("| %-" + indexWidth + "s| %-" + nameWidth + "s| %-" + districtWidth + "s| %-" + conditionWidth + "s|", (i + 1), names[i], districts[i], condition[i]));
             }
             input.close();
         } catch (IOException ex) {

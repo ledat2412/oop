@@ -110,8 +110,7 @@ class KhachHang implements INhapXuat{
             bw.close();
         }catch(IOException e){
             System.out.println(e);
-        }
-        
+        } 
     }
 
     public void xuat(){

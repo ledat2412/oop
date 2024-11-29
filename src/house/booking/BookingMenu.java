@@ -128,48 +128,79 @@ class Booking {
         // Định nghĩa đường dẫn file
         File bookingFile = new File("src/input/booking.txt");
         File clientFile = new File("src/input/client.txt");
-    
+
         try {
-            // Xóa thông tin đặt phòng trong booking.txt
-            XoaThongTinTrongFile(bookingFile, maDatNha);
-    
-            // Xóa thông tin khách hàng trong client.txt
-            XoaThongTinTrongFile(clientFile, maDatNha);
-    
-            System.out.println("Đã xóa thông tin đặt phòng và khách hàng liên quan đến mã đặt phòng: " + maDatNha);
-    
+            // Xóa thông tin đặt phòng trong booking.txt và lấy số dòng đã xóa
+            int lineToDelete = XoaThongTinTrongFile(bookingFile, maDatNha);
+
+            if (lineToDelete != -1) {
+                // Xóa thông tin khách hàng trong client.txt dựa trên dòng đã xóa
+                XoaDongTrongFile(clientFile, lineToDelete);
+
+                System.out.println("Đã xóa thông tin đặt phòng và khách hàng liên quan đến mã đặt phòng: " + maDatNha);
+            } else {
+                System.out.println("Không tìm thấy mã đặt phòng trong file booking.txt.");
+            }
+
         } catch (IOException e) {
             System.out.println("Lỗi khi xử lý file: " + e.getMessage());
         }
     }
-    
-    private void XoaThongTinTrongFile(File file, String maDatNha) throws IOException {
-        // Đọc file vào bộ nhớ
+
+    private int XoaThongTinTrongFile(File file, String maDatNha) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         StringBuilder updatedData = new StringBuilder();
         String line;
-        
-        // Đọc từng dòng và kiểm tra nếu dòng không chứa maDatNha thì giữ lại
+        int currentLine = 0; // Đếm dòng hiện tại
+        int lineToDelete = -1; // Lưu số dòng chứa mã cần xóa
         boolean found = false;
+    
         while ((line = reader.readLine()) != null) {
-            if (!line.contains(maDatNha)) {
-                updatedData.append(line).append("\n");
+            currentLine++;
+            // Phân tách dòng thành các trường
+            String[] parts = line.split(", "); // Phân cách theo ", "
+            
+            // Kiểm tra nếu mã phòng nằm ở cột thứ 3 (index = 2)
+            if (parts.length > 2 && parts[2].trim().equals(maDatNha)) {
+                found = true;
+                lineToDelete = currentLine; // Ghi nhận dòng cần xóa
             } else {
-                found = true; // Đánh dấu là đã tìm thấy mã cần xóa
+                // Giữ lại các dòng không bị xóa
+                updatedData.append(line).append("\n");
             }
         }
         reader.close();
     
-        // Nếu tìm thấy mã đặt phòng trong file, ghi lại dữ liệu đã chỉnh sửa
+        // Nếu tìm thấy mã đặt phòng, ghi lại nội dung đã chỉnh sửa
         if (found) {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write(updatedData.toString());
             writer.close();
         }
-        // Nếu không tìm thấy mã đặt phòng trong file, không làm gì cả
-        else {
-            System.out.println("Không tìm thấy mã đặt phòng trong file: " + file.getName());
+    
+        return lineToDelete; // Trả về số dòng đã xóa (hoặc -1 nếu không tìm thấy)
+    }
+
+    private void XoaDongTrongFile(File file, int lineToDelete) throws IOException {
+        // Đọc file vào bộ nhớ
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        StringBuilder updatedData = new StringBuilder();
+        String line;
+        int currentLine = 0;
+
+        // Đọc từng dòng và giữ lại các dòng không bị xóa
+        while ((line = reader.readLine()) != null) {
+            currentLine++;
+            if (currentLine != lineToDelete) {
+                updatedData.append(line).append("\n");
+            }
         }
+        reader.close();
+
+        // Ghi lại dữ liệu đã chỉnh sửa
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(updatedData.toString());
+        writer.close();
     }
 
     // ------------phần của Quyền ---------------- //
@@ -291,6 +322,7 @@ class Booking {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
             for (int i = 0; i < n; i++) {
+                // Duy trì thứ tự dòng khi ghi vào file
                 bw.write(DatNha[i].getQuanDatNha() + ", " +
                          DatNha[i].getTenHomeStay() + ", " +
                          DatNha[i].getMaDatNha() + ", " +
@@ -300,9 +332,10 @@ class Booking {
             }
             bw.close();
         } catch (Exception e) {
-            System.out.println("Loi khi ghi file: " + e.getMessage());
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }
     }
+    
     // ------------phần của Quyền ---------------- //
     // public void TimKiemThongTinDatNha(String MaDatNha){
     //     for(int i = 0; i < n; i++){
@@ -394,6 +427,45 @@ class Booking {
     }
 
     public void NhapThongTinDatNha(Scanner sc) {
+        String hoten, makh, sdt, email, diachi; 
+
+            // ------------phần của Đạt ---------------- //
+            try{
+                FileWriter fw = new FileWriter("src/input/client.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                // ------------phần của Huy ---------------- //
+                System.out.print("\nNhap ten khach hang: ");
+                hoten = sc.nextLine();
+                System.out.print("Nhap ma khach hang: ");
+                makh = sc.nextLine();
+                System.out.print("Nhap so dien thoai: ");
+                sdt = sc.nextLine();
+                System.out.println("Nhap sinh nhat: ");
+                    System.out.print("Nhap thang: ");
+                    thang = sc.nextInt();
+                    while(thang < 1 || thang > 12){
+                        System.out.println("Nhap lai ");
+                        thang = sc.nextInt();
+                    }
+                    System.out.print("Nhap ngay: ");
+                    ngay = sc.nextInt();
+                    while(ngay < 1 || ngay > 31){
+                        System.out.println("Nhap lai ");
+                        ngay = sc.nextInt();
+                    }
+                    System.out.print("Nhap nam: ");
+                    nam = sc.nextInt();
+                    sc.nextLine();
+                System.out.print("\nNhap email: ");
+                email = sc.nextLine();
+                System.out.print("Nhap dia chi: ");
+                diachi = sc.nextLine();
+                // ------------phần của Đạt ---------------- //
+                bw.write(hoten+", "+makh+", "+sdt+", "+ngay+"/"+thang+"/"+nam+", "+email+", "+diachi);
+                bw.close();
+            }catch(IOException e){
+                System.out.println(e);
+            } 
         // ------------phần của Đạt ---------------- //
         try{
             FileWriter fw = new FileWriter("src/input/booking.txt", true);

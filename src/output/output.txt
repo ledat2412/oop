@@ -1,8 +1,11 @@
 === Reciept ===
-District: quan 19
-House Name: THe fuck
-Booking ID: 400
-Start Date: 12/3/2020
-Check-in Date: 13/3/2020
-Check-out Date: 14/3/2020
+Customer Name: Niggeria
+District: 3
+House Name: JJJ
+Booking ID: 145
+Start Date: 12/02/2005
+Check-in Date: 13/02/2005
+Check-out Date: 20/02/2005
+Tong so ngay o: 7
+Tong so tien thue: 700000
 ================

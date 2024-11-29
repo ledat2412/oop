@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import house.booking.BookingMenu;
 import house.showoff.house;
-import people.slave.readfile;
 import people.client.Project;
 import people.slave.Worker;
 import reciept.reciept;

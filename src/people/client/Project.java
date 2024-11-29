@@ -7,12 +7,9 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
-interface INhapXuat{
-    public void nhap();
-    public void xuat();
-}
+import Inhapxuat.Inhapxuat;
 
-class ThoiGian implements INhapXuat{
+class ThoiGian implements Inhapxuat{
     Scanner rd = new Scanner(System.in);
     private int ngay, thang, nam;
 
@@ -69,7 +66,7 @@ class ThoiGian implements INhapXuat{
     }
 }
 
-class KhachHang implements INhapXuat{
+class KhachHang implements Inhapxuat{
     Scanner rd = new Scanner(System.in);
     ThoiGian tg = new ThoiGian();
 
@@ -161,9 +158,10 @@ class KhachHang implements INhapXuat{
     }
 }
 
-class DSKH implements INhapXuat{
+class DSKH implements Inhapxuat{
     Scanner rd = new Scanner(System.in);
     ThoiGian tg = new ThoiGian();
+    private static int dem = 0;
     KhachHang[] dskh;
     private int n;
 
@@ -187,9 +185,11 @@ class DSKH implements INhapXuat{
             System.out.println("Nhap thong tin khach hang thu "+(i+1));
             dskh[i] = new KhachHang();
             dskh[i].nhap();
+            dem++;
         }
     }
 
+    @Override
     public void xuat(){
         for(int i = 0; i < n; i++){
             System.out.println("------------------------");
@@ -213,6 +213,7 @@ class DSKH implements INhapXuat{
             System.out.print("Vui long nhap lai ");
             choose = rd.nextInt();
         }
+        dem++;
         if(choose == 1){
             do{
                 dskh = Arrays.copyOf(dskh, n+1);
@@ -228,6 +229,7 @@ class DSKH implements INhapXuat{
                     System.out.print("Vui long nhap lai ");
                     choose = rd.nextInt();
                 }
+                dem++;
             }
             while(choose == 1);
         }
@@ -257,6 +259,7 @@ class DSKH implements INhapXuat{
             fw.write(sb.toString());
             fw.close();
             System.out.println("Da xoa khach hang ma " + maKH);
+            dem--;
 
         } catch (IOException e) {
             System.out.println("Loi khi xu ly file: " + e.getMessage());
@@ -383,6 +386,17 @@ class DSKH implements INhapXuat{
             System.out.println("loai file khong hop le: " + e.getMessage());
         }
     }
+    public void Dem(){
+        try (BufferedReader br = new BufferedReader(new FileReader("src/input/client.txt"))) {
+            int count = 0;
+            while (br.readLine() != null) {
+                count++;
+            }
+            System.out.println("So luong khach hang trong file: "+count);
+        } catch (IOException e) {
+            System.out.println("Loi khi xu ly file: " + e.getMessage());
+        }
+    }
 }    
 
 class QuanLyDSKH{
@@ -401,6 +415,7 @@ class QuanLyDSKH{
             System.out.println ("|3.Sua thong tin khach hang                                                                                                      |");
             System.out.println ("|4.Tim kiem khach hang                                                                                                           |");
             System.out.println ("|5.Xoa                                                                                                                           |");
+            System.out.println ("|6.So luong khach hang                                                                                                           |");
             System.out.println ("|0.Thoat                                                                                                                         |");
             System.out.println ("==================================================================================================================================");
 
@@ -421,6 +436,9 @@ class QuanLyDSKH{
                     break;
                 case 5:
                     ds.xoa();
+                    break;
+                case 6:
+                    ds.Dem();
                     break;
                 case 0:
                     return;

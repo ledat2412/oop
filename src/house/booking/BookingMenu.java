@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import Inhapxuat.Inhapxuat;
 // ------------phần của Quyền ---------------- //
 public class BookingMenu {
     public void main() {
@@ -15,7 +16,7 @@ public class BookingMenu {
     }
 }
 
-class Booking {
+class Booking implements Inhapxuat {
     KhachHangDat[] DatNha;
     int n;
 
@@ -55,6 +56,7 @@ class Booking {
     }
     
     // ------------phần của Quyền ---------------- //
+
     public void NhapThongTinDatNha(Scanner sc) {
         System.out.print("Nhap so luong khach hang: ");
         n = sc.nextInt();
@@ -80,48 +82,6 @@ class Booking {
         DatNha[n].NhapThongTinDatNha(sc);
         n++;
     }
-
-    // public void XoaThongTinDatNha(String MaDatNha) {
-    //     for (int i = 0; i < n; i++) {
-    //         if (DatNha[i].getMaDatNha().equals(MaDatNha)) {
-    //             for (int j = i; j < n - 1; j++) {
-    //                 DatNha[j] = DatNha[j + 1];
-    //             }
-    //             DatNha = Arrays.copyOf(DatNha, n - 1);
-    //             n--;
-    //             System.out.println("Da xoa thanh cong thong tin dat nha " + MaDatNha);
-    //             return;
-    //         }
-    //     }
-    //     System.out.println("Khong tim thay ma dat nha " + MaDatNha);
-    // }
-
-    // ------------phần của Đạt ---------------- //
-    // public void XoaThongTinDatNha(String maDatNha) {
-    //     DocThongTinTuFile("src/input/booking.txt");
-    
-    //     boolean found = false;
-    //     for (int i = 0; i < n; i++) {
-    //         if (DatNha[i].getMaDatNha().equals(maDatNha)) {
-    //             found = true;
-    
-    //             // Dịch các phần tử phía sau lên một vị trí
-    //             for (int j = i; j < n - 1; j++) {
-    //                 DatNha[j] = DatNha[j + 1];
-    //             }
-    //             DatNha[n - 1] = null; // Xóa phần tử cuối
-    //             n--; // Giảm số lượng phần tử
-    //             break;
-    //         }
-    //     }
-    
-    //     if (!found) {
-    //         System.out.println("Khong tim thay ma dat nha: " + maDatNha);
-    //     } else {
-    //         GhiThongTinVaoFile("src/input/booking.txt");
-    //         System.out.println("Xoa thong tin thanh cong!");
-    //     }
-    // }
 
     // ------------phần của Đạt ---------------- //
     public void XoaThongTinDatNha(String maDatNha) {
@@ -356,19 +316,7 @@ class Booking {
             System.out.println("Lỗi khi ghi file: " + e.getMessage());
         }
     }
-    
-    // ------------phần của Quyền ---------------- //
-    // public void TimKiemThongTinDatNha(String MaDatNha){
-    //     for(int i = 0; i < n; i++){
-    //         if(DatNha[i].getMaDatNha().equals(MaDatNha)){
-    //             DatNha[i].xuat();
-    //             break;
-    //         }
-    //         else {
-    //             System.out.println("Khong co ma nha ban kiem");
-    //         }
-    //     }
-    // }
+
     // ------------phần của Đạt ---------------- //
     public void TimKiemThongTinDatNha(String MaDatNha){
         DocThongTinTuFile("src/input/booking.txt");
@@ -387,8 +335,8 @@ class Booking {
             System.out.println("Khong tim thay thong tin voi ma dat nha: " + MaDatNha);
         }
     }
-    
-    public class KhachHangDat {
+
+    class KhachHangDat implements Inhapxuat {
     private String quanDatNha;
     private String tenHomeStay;
     private String maDatNha;
@@ -446,7 +394,7 @@ class Booking {
     public void setNgayTraNha(String ngayTraNha) {
         this.ngayTraNha = ngayTraNha;
     }
-
+    
     public void NhapThongTinDatNha(Scanner sc) {
         String hoten, makh, sdt, email, diachi; 
 
@@ -595,7 +543,38 @@ class Booking {
         return (nam % 4 == 0 && nam % 100 != 0) || (nam % 400 == 0);
     }
 
+    public static int TinhTongSoNgay (int ngay, int thang, int nam) {
+        int [] SoNgayTrongThang = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (NamNhuan(nam)) {
+            SoNgayTrongThang[1] = 29;
+        }
+        int TongSoNgay = 0;
+        for (int i = 0; i < thang - 1; i++) {
+            TongSoNgay += SoNgayTrongThang[i];
+        }
+        // Cộng thêm số ngày của tháng hiện tại 
+        TongSoNgay += ngay; 
+        return TongSoNgay;
+    }
 
+    public static int TinhSoNgayGiuaHaiMocThoiGian (int ngay1, int thang1, int nam1, int ngay2, int thang2, int nam2) {
+        int soNgayNam1 = TinhTongSoNgay(ngay1, thang1, nam1);
+        int soNgayNam2 = TinhTongSoNgay(ngay2, thang2, nam2);
+        if (nam1 == nam2) {
+            return soNgayNam2 - soNgayNam1;
+        }
+        int tongSoNgayNam1 = NamNhuan(nam1) ? 366 : 365;
+        int soNgayConLaiNam1 = tongSoNgayNam1 - soNgayNam1;
+        int soNgayGiua = 0;
+        for (int nam = nam1 + 1; nam < nam2; nam++) {
+            soNgayGiua += NamNhuan(nam) ? 366 : 365;
+        }
+
+        return soNgayConLaiNam1 + soNgayGiua + soNgayNam2;
+
+    }
+
+    @Override
     public void xuat() {
         System.out.println("Quan ban muon o: " + quanDatNha);
         System.out.println("Ten homestay ban muon o: " + tenHomeStay);
@@ -603,7 +582,35 @@ class Booking {
         System.out.println("Ngay dat nha: " + ngayDatNha);
         System.out.println("Ngay nhan nha: " + ngayNhanNha);
         System.out.println("Ngay tra nha: " + ngayTraNha); 
+
+        String[] ngayNhan = ngayNhanNha.split("/");
+        String[] ngayTra = ngayTraNha.split("/");
+        int soNgayO = TinhSoNgayGiuaHaiMocThoiGian(
+            Integer.parseInt(ngayNhan[0]), Integer.parseInt(ngayNhan[1]), Integer.parseInt(ngayNhan[2]),
+            Integer.parseInt(ngayTra[0]), Integer.parseInt(ngayTra[1]), Integer.parseInt(ngayTra[2])
+        );
+        System.out.println("Tong so ngay o: " + soNgayO);
+
+        // Tính tiền
+        int giaTienMotNgay = 100000;
+        int tongTien = giaTienMotNgay * soNgayO;
+        System.out.println("Tong so tien thue: " + tongTien + " VND");
         }
+
+    @Override
+    public void nhap() {
+        throw new UnsupportedOperationException("Unimplemented method 'nhap'");
+    }
+    }
+
+    @Override
+    public void nhap() {
+        throw new UnsupportedOperationException("Unimplemented method 'nhap'");
+    }
+
+    @Override
+    public void xuat() {
+        throw new UnsupportedOperationException("Unimplemented method 'xuat'");
     }
 }
 

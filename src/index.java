@@ -34,7 +34,7 @@ public class index {
                     client.main();
                     break;
                 case 4:
-                    Worker worker = new Worker;();
+                    Worker worker = new Worker();
                     worker.main();
                     break;
                 case 5:

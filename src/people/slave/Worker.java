@@ -393,107 +393,124 @@ public void them() {
         }
     }
 
-
-    
    // Hàm sửa thông tin nhân viên
-public void sua() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Nhap ma nhan vien can sua: ");
-    String Ma = scanner.nextLine();
-    boolean found = false;
+    public void sua() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhap ma nhan vien can sua: ");
+        String Ma = scanner.nextLine();
+        boolean found = false;
 
-    try {
-        File file = new File("src/input/worker.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        StringBuilder sb = new StringBuilder();
-        String line;
+        try {
+            File file = new File("src/input/worker.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line;
 
-        while ((line = br.readLine()) != null) {
-            String[] parts = line.split(", ");
-            if (!parts[1].equals(Ma)) {
-                sb.append(line).append("\n");
-            } else {
-                found = true;
-                System.out.println("Thong tin hien tai cua nhan vien: ");
-                System.out.println(line);
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (!parts[1].equals(Ma)) {
+                    sb.append(line).append("\n");
+                } else {
+                    found = true;
+                    System.out.println("Thong tin nhan vien can sua:");
+                    System.out.println(line);
 
-                System.out.println("Chon muc can sua: ");
-               // System.out.println("1. Ma nhan vien");
-                System.out.println("1. Ho va ten");
-                System.out.println("2. So dien thoai");
-                System.out.println("3. Ngay sinh");
-                System.out.println("4. Email");
-                System.out.println("5. Luong");
-                if (line.contains("TiepTan")) {
-                    System.out.println("6. Cong viec tu van");
-                } else if (line.contains("LaoCong")) {
-                    System.out.println("6. Cong viec don dep");
-                } else if (line.contains("NVQuanLy")) {
-                    System.out.println("6. Cong viec quan ly");
+                    System.out.println("Chon thong tin can sua:");
+                    System.out.println("1. Loai nhan vien");
+                    System.out.println("2. Ho va ten nhan vien");
+                    System.out.println("3. so dien thoai nhan vien");
+                    System.out.println("4. email nhan vien");
+                    System.out.println("5. luong nhan vien");
+                    System.out.println("6. ngay sinh nhan vien");
+                    System.out.println("7. thong tin cong viec nhan vien");
+                    System.out.print("Lua chon: ");
+                    int choice = scanner.nextInt();
+                    scanner.nextLine(); // Đọc dòng mới còn lại
+
+                    String newInfo = "";
+                    switch (choice) {
+                        case 1:
+                            int type;
+                            do {
+                                System.out.println("Chon loai nhan vien moi: ");
+                                System.out.println("1. Tiep Tan");
+                                System.out.println("2. Don Dep");
+                                System.out.println("3. Quan Ly");
+                                System.out.print("Lua chon: ");
+                                type = scanner.nextInt();
+                                scanner.nextLine();
+                                if (type < 1 || type > 3) {
+                                    System.out.println("Lua chon khong hop le, nhap lai!");
+                                }
+                            } while (type < 1 || type > 3);
+
+                            switch (type) {
+                                case 1:
+                                    newInfo = "Tiep Tan";
+                                    break;
+                                case 2:
+                                    newInfo = "Don Dep";
+                                    break;
+                                case 3:
+                                    newInfo = "Quan Ly";
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            System.out.print("Nhap ho va ten nhan vien moi: ");
+                            newInfo = scanner.nextLine();
+                            break;
+                        case 3:
+                            System.out.print("Nhap so dien thoai nhan vien moi: ");
+                            newInfo = scanner.nextLine();
+                            break;
+                        case 4:
+                            System.out.print("Nhap email nhan vien moi: ");
+                            newInfo = scanner.nextLine();
+                            break;
+                        case 5:
+                            System.out.print("Nhap luong nhan vien moi: ");
+                            newInfo = scanner.nextLine();
+                            break;
+                        case 6:
+                            System.out.print("Nhap ngay sinh nhân viên moi: ");
+                            newInfo = scanner.nextLine();
+                            break;
+                        case 7:
+                            System.out.print("Nhap thong tin cong viec moi: ");
+                            newInfo = scanner.nextLine();
+                            break;
+                        default:
+                            System.out.println("Lua chon khong hop le, nhap lai!");
+                            break;
+                    }
+
+                    String[] newParts = line.split(", ");
+                    if (choice == 1) {
+                        newParts[0] = newInfo; // Loại nhân viên
+                    } else {
+                        newParts[choice] = newInfo;
+                    }
+                    sb.append(String.join(", ", newParts)).append("\n");
                 }
-                System.out.print("Lua chon: ");
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Đọc dòng mới còn lại
-
-                String newInfo = "";
-                switch (choice) {
-                    case 1:
-                        System.out.print("Nhap ho va ten moi: ");
-                        newInfo = scanner.nextLine();
-                        break;
-                    case 2:
-                        System.out.print("Nhap so dien thoai moi: ");
-                        newInfo = scanner.nextLine();
-                        break;
-                    case 3:
-                        System.out.print("Nhap ngay sinh moi: ");
-                        newInfo = scanner.nextLine();
-                        break;
-                    case 4:
-                        System.out.print("Nhap email moi: ");
-                        newInfo = scanner.nextLine();
-                        break;
-
-                    case 5:
-                        System.out.print("Nhap luong moi: ");
-                        newInfo = scanner.nextLine();
-                        break;
-                    case 6:
-                        if (line.contains("TiepTan")) {
-                            System.out.print("Nhap cong viec tu van moi: ");
-                            newInfo = scanner.nextLine();
-                        } else if (line.contains("LaoCong")) {
-                            System.out.print("Nhap cong viec don dep moi: ");
-                            newInfo = scanner.nextLine();
-                        } else if (line.contains("NVQuanLy")) {
-                            System.out.print("Nhap cong viec quan ly moi: ");
-                            newInfo = scanner.nextLine();
-                        }
-                        break;
-                    default:
-                        System.out.println("Lua chon khong hop le!");
-                        break;
-                }
-
-                String[] newParts = line.split(", ");
-                newParts[choice] = newInfo;
-                sb.append(String.join(", ", newParts)).append("\n");
             }
-        }
 
-        if (found) {
-            FileWriter fw = new FileWriter(file);
-            fw.write(sb.toString());
-            fw.close();
-            System.out.println("Thong tin nhan vien da duoc cap nhat.");
-        } else {
-            System.out.println("Khong tim thay nhan vien can sua.");
-        }
+            if (found) {
+                FileWriter fw = new FileWriter(file);
+                fw.write(sb.toString());
+                fw.close();
+                System.out.println("thong tin nhan vien da duoc sua.");
+            } else {
+                System.out.println("khong tim thay nhan vien co ma " + Ma);
+            }
 
-    } catch (IOException e) {
-        System.out.println("Loi khi xu ly file: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("loi khi xu ly file: " + e.getMessage());
+        }
     }
-}
+
+
+
 
 
     // Hàm tìm kiếm nhân viên
@@ -552,17 +569,21 @@ public class Worker {
         int luachon;
 
         do {
-            System.out.println("_____MENU_____");
-            System.out.println("1. Nhap danh sach nhan vien");
-            System.out.println("2. Hien thi danh sach nhan vien");
-            System.out.println("3. Them nhan vien");
-            System.out.println("4. Tim kiem nhan vien");
-            System.out.println("5. Xoa nhan vien");
-            System.out.println("6. Sua thong tin nhan vien");
-            System.out.println("7. Dem so luong nhan vien");
-            System.out.println("0. Thoat");
+            System.out.println ("==============================================================worker==============================================================");
+            readfile r = new readfile();
+            r.read();
+            System.out.println ("----------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println ("|1. Nhap danh sach nhan vien                                                                                                     |");
+            System.out.println ("|2. Hien thi danh sach nhan vien                                                                                                 |");
+            System.out.println ("|3. Them nhan vien                                                                                                               |");
+            System.out.println ("|4. Tim kiem nhan vien                                                                                                           |");
+            System.out.println ("|5. Xoa nhan vien                                                                                                                |");
+            System.out.println ("|6. Sua thong tin nhan vien                                                                                                      |");
+            System.out.println ("|7. Dem so luong nhan vien                                                                                                       |");
+            System.out.println ("|0. Thoat                                                                                                                        |");
+            System.out.println ("==================================================================================================================================");
             System.out.print("Lua chon: ");
-            
+
             // Kiểm tra nhập sai
             while (!scanner.hasNextInt()) {
                 System.out.println("Lua chon khong hop le. Vui long nhap lai!");
@@ -570,7 +591,8 @@ public class Worker {
             }
             luachon = scanner.nextInt();
             scanner.nextLine(); // Đọc bỏ dòng trống
-
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
             switch (luachon) {
                 case 1:
                     dsnv.nhap();

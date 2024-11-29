@@ -4,6 +4,7 @@ import house.showoff.house;
 import people.slave.readfile;
 import people.client.Project;
 import people.slave.Worker;
+import reciept.reciept;
 
 public class index {
     public static void main(String[] args) {
@@ -38,8 +39,8 @@ public class index {
                     worker.main();
                     break;
                 case 5:
-                    readfile r = new readfile();
-                    r.read();
+                    reciept reciept = new reciept();
+                    reciept.printReciept();
                     break;
                 default:
                     System.out.println("select invalid. Please select again!");

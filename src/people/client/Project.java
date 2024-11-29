@@ -4,6 +4,9 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 interface INhapXuat{
     public void nhap();
     public void xuat();
@@ -233,85 +236,154 @@ class DSKH implements INhapXuat{
     public void xoa(){
         System.out.print("Nhap ma khach hang muon xoa: ");
         String maKH = rd.nextLine();
-        for (int i = 0; i < n; i++){
-            if(dskh[i].getMa().equals(maKH)){
-                for(int j = i; j < n-1; j++){
-                    dskh[j] = dskh[j+1];
+        try {
+            File file = new File("src/input/client.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (!parts[1].equals(maKH)) {
+                    sb.append(line).append("\n");
                 }
-                dskh = Arrays.copyOf(dskh, n-1);
-                n--;
-                break;
             }
+
+            if (sb.length() > 0) {
+                sb.deleteCharAt(sb.length() - 1); // Xoa ky tu newline cuoi cung
+            }
+
+            FileWriter fw = new FileWriter(file);
+            fw.write(sb.toString());
+            fw.close();
+            System.out.println("Da xoa khach hang ma " + maKH);
+
+        } catch (IOException e) {
+            System.out.println("Loi khi xu ly file: " + e.getMessage());
         }
     }
+
+    // public void xoa(){
+    //     System.out.print("Nhap ma khach hang muon xoa: ");
+    //     String maKH = rd.nextLine();
+    //     for (int i = 0; i < n; i++){
+    //         if(dskh[i].getMa().equals(maKH)){
+    //             for(int j = i; j < n-1; j++){
+    //                 dskh[j] = dskh[j+1];
+    //             }
+    //             dskh = Arrays.copyOf(dskh, n-1);
+    //             n--;
+    //             break;
+    //         }
+    //     }
+    // }
 
     public void timkiem(){
         System.out.print("Nhap ma khach hang muon tim kiem: ");
         String maKH = rd.nextLine();
-        boolean find = false;
-        for(int i = 0; i < n; i++){
-            if(dskh[i].getMa().equals(maKH)){
-                find = true;
-                dskh[i].xuat();
-                break;
+        try {
+            File file = new File("src/input/client.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            boolean found = false;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (parts[1].equals(maKH)) {
+                    found = true;
+                    System.out.println(line);
+                    break;
+                }
             }
-        }
-        if (!find){
-            System.out.println("Khong tim thay khach hang");
+            if (!found) {
+                System.out.println("Khong tim thay khach hang");
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
-    public void sua(){
+    public void sua() {
         System.out.print("Nhap ma khach hang muon sua: ");
         String maKH = rd.nextLine();
-        for(int i = 0; i < n; i++){
-            if(dskh[i].getMa().equals(maKH)){
-                int luachon;
-                do{
-                    System.out.println("------------------------");
-                    dskh[i].xuat();
-                    System.out.println("------------------------");
-                    System.out.println("1.Sua ten khach hang: ");
-                    System.out.println("2.Sua so dien thoai: ");
-                    System.out.println("3.Sua email: ");
-                    System.out.println("4.Nhap ngay sinh: ");
-                    System.out.println("5.Sua dia chi: ");
-                    System.out.println("0.Quay lai. ");
-                    System.out.print("Chon thong tin muon sua: ");
-                    luachon = rd.nextInt();
-                    rd.nextLine();
-                    switch(luachon){
-                        case 1:
-                            System.out.print("Nhap ten moi: ");
-                            dskh[i].setHoTen(rd.nextLine());
-                            break;
-                        case 2:
-                            System.out.print("Nhap so dien thoai moi: ");
-                            dskh[i].setSDT(rd.nextLine());
-                            break;
-                        case 3:
-                            System.out.print("Nhap email moi: ");
-                            dskh[i].setMail(rd.nextLine());
-                            break;
-                        case 4:
-                            System.out.println("Nhap ngay sinh moi: ");
-                            dskh[i].tg.nhap();
-                            break;
-                        case 5:
-                            System.out.print("Nhap dia chi moi: ");
-                            dskh[i].setDC(rd.nextLine());
-                            break;
-                        case 0:
-                            break;
-                        default:
-                            System.out.println("Lua chon khong hop le");
-                    }
+        File file = new File("src/input/client.txt");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            boolean found = false;
+    
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(", ");
+                if (!parts[1].equals(maKH)) {
+                    sb.append(line).append("\n");
+                } else {
+                    found = true;
+                    int luachon;
+                    do {
+                        System.out.println("------------------------");
+                        System.out.println("1. Sua ten");
+                        System.out.println("2. Sua sdt");
+                        System.out.println("3. Sua email");
+                        System.out.println("4. Sua ngay sinh");
+                        System.out.println("5. Sua dia chi");
+                        System.out.println("0. Quay lai");
+                        System.out.print("Chon: ");
+                        luachon = rd.nextInt();
+                        rd.nextLine(); // Đọc bỏ dòng trống
+    
+                        switch (luachon) {
+                            case 1:
+                                System.out.print("Nhap ten moi: ");
+                                parts[0] = rd.nextLine(); // Tên ở vị trí đầu tiên
+                                break;
+                            case 2:
+                                System.out.print("Nhap sdt moi: ");
+                                parts[2] = rd.nextLine(); // Số điện thoại ở vị trí thứ 3
+                                break;
+                            case 3:
+                                System.out.print("Nhap email moi: ");
+                                parts[4] = rd.nextLine(); // Email ở vị trí thứ 5
+                                break;
+                            case 4:
+                                System.out.print("Nhap ngay sinh moi: ");
+                                parts[3] = rd.nextLine(); // Ngày sinh ở vị trí thứ 4
+                                break;
+                            case 5:
+                                System.out.print("Nhap dia chi moi: ");
+                                parts[5] = rd.nextLine(); // Địa chỉ ở vị trí thứ 6
+                                break;
+                            case 0:
+                                System.out.println("Quay lai.");
+                                break;
+                            default:
+                                System.out.println("lua chon khong hop le.");
+                        }
+                    } while (luachon != 0);
+    
+                    // Ghi lại dòng đã sửa
+                    line = String.join(", ", parts);
+                    sb.append(line).append("\n");
                 }
-                while(luachon != 0);
             }
+            br.close();
+    
+            // Nếu tìm thấy, ghi lại file; nếu không, thông báo lỗi
+            if (found) {
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(sb.toString());
+                bw.close();
+                System.out.println("Thong tin khach hang da duoc sua.");
+            } else {
+                System.out.println("Khong tim thay khach hang: " + maKH);
+            }
+        } catch (IOException e) {
+            System.out.println("loai file khong hop le: " + e.getMessage());
         }
     }
-}
+}    
 
 class QuanLyDSKH{
     Scanner rd = new Scanner(System.in);
@@ -320,15 +392,18 @@ class QuanLyDSKH{
         int choice;
         ds.nhap();
         do{
+            System.out.println ("==============================================================client==============================================================");
             Readfile raf = new Readfile();
             raf.read();
-            System.out.println("\n======================DANH SACH KHACH HANG======================");
-            System.out.println("1.Xem danh sach khach hang");
-            System.out.println("2.Them khach hang");
-            System.out.println("3.Sua thong tin khach hang");
-            System.out.println("4.Tim kiem khach hang");
-            System.out.println("5.Xoa");
-            System.out.println("0.Thoat");
+            System.out.println ("----------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println ("|1.Xem danh sach khach hang                                                                                                      |");
+            System.out.println ("|2.Them khach hang                                                                                                               |");
+            System.out.println ("|3.Sua thong tin khach hang                                                                                                      |");
+            System.out.println ("|4.Tim kiem khach hang                                                                                                           |");
+            System.out.println ("|5.Xoa                                                                                                                           |");
+            System.out.println ("|0.Thoat                                                                                                                         |");
+            System.out.println ("==================================================================================================================================");
+
             System.out.print("Nhap lua chon cua ban: ");
             choice = rd.nextInt();
             switch(choice){

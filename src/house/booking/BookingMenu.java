@@ -206,117 +206,138 @@ class Booking {
     // ------------phần của Quyền ---------------- //
     public void SuaThongTinDatNha(String MaDatNha, Scanner sc) {
         // ------------phần của Đạt ---------------- //
-        DocThongTinTuFile("src/input/booking.txt");
-        // ------------phần của Quyền ---------------- //
-        boolean found = false;
-        for (int i = 0; i < n; i++) {
-            if (DatNha[i].getMaDatNha().equals(MaDatNha)) {
-                found = true;
-                int luachon;
-                do {
-                    System.out.println("==== Chon thong tin muon sua ====");
-                    System.out.println("1. Sua quan");
-                    System.out.println("2. Sua ten homestay");
-                    System.out.println("3. Sua thoi gian dat phong");
-                    System.out.println("4. Sua thoi gian nhan phong");
-                    System.out.println("5. Sua thoi gian tra phong");
-                    System.out.println("6. Thoat sua thong tin");
-                    System.out.print("Lua chon: ");
-                    luachon = sc.nextInt();
-                    sc.nextLine(); // Xóa ký tự thừa
-    
-                    switch (luachon) {
-                        case 1:
-                            System.out.print("Nhap lai quan ban muon o: ");
-                            DatNha[i].setQuanDatNha(sc.nextLine());
-                            break;
-                        case 2:
-                            System.out.print("Nhap lai ten homestay ban muon o: ");
-                            DatNha[i].setTenHomeStay(sc.nextLine());
-                            break;
-                        case 3:
-                            while (true) {
-                                System.out.println("---------------------------------");
-                                System.out.println("Vui long nhap lai thoi gian dat phong");
-                                System.out.print("Nhap ngay: ");
-                                int ngay = sc.nextInt();
-                                System.out.print("Nhap thang: ");
-                                int thang = sc.nextInt();
-                                System.out.print("Nhap nam: ");
-                                int nam = sc.nextInt();
+        File bookingFile = new File("src/input/booking.txt");
+        try {
+            // Đọc file vào bộ nhớ
+            BufferedReader reader = new BufferedReader(new FileReader(bookingFile));
+            StringBuilder updatedData = new StringBuilder();
+            String line;
+            int currentLine = 0; // Đếm dòng hiện tại
+
+            while ((line = reader.readLine()) != null) {
+                currentLine++;
+                String[] parts = line.split(", ");
+                if (parts.length > 2 && parts[2].trim().equals(MaDatNha)) {
+                    // Sua thong tin trong dòng
+                    int luachon;
+                    do {
+                        System.out.println("==== Chon thong tin muon sua ====");
+                        System.out.println("1. Sua quan");
+                        System.out.println("2. Sua ten homestay");
+                        System.out.println("3. Sua thoi gian dat phong");
+                        System.out.println("4. Sua thoi gian nhan phong");
+                        System.out.println("5. Sua thoi gian tra phong");
+                        System.out.println("6. Thoat sua thong tin");
+                        System.out.print("Lua chon: ");
+                        luachon = sc.nextInt();
+                        sc.nextLine(); // Xóa ký tự thừa
+
+                        switch (luachon) {
+                            case 1:
+                                System.out.print("Nhap lai quan ban muon o: ");
+                                String quanMoi = sc.nextLine();
+                                parts[0] = quanMoi;
+                                break;
+                            case 2:
+                                System.out.print("Nhap lai ten homestay ban muon o: ");
+                                String tenHomeStayMoi = sc.nextLine();
+                                parts[1] = tenHomeStayMoi;
+                                break;
+                            case 3:
+                                while (true) {
+                                    System.out.println("---------------------------------");
+                                    System.out.println("Vui long nhap lai thoi gian dat phong");
+                                    System.out.print("Nhap ngay: ");
+                                    int ngay = sc.nextInt();
+                                    System.out.print("Nhap thang: ");
+                                    int thang = sc.nextInt();
+                                    System.out.print("Nhap nam: ");
+                                    int nam = sc.nextInt();
                     
-                                if (KhachHangDat.KiemTraNgayThang(ngay, thang, nam)) {
-                                    String ngayDatPhongMoi = ngay + "/" + thang + "/" + nam;
-                                    DatNha[i].setNgayDatNha(ngayDatPhongMoi);
-                                    System.out.println("Ngay dat nha da cap nhat thanh cong: " + ngayDatPhongMoi);
-                                    sc.nextLine(); 
-                                    break;
-                                } 
-                                else {
-                                    System.out.println("Ngay thang nam khong hop le, vui long nhap lai.");
+                                    if (KhachHangDat.KiemTraNgayThang(ngay, thang, nam)) {
+                                        String ngayDatPhongMoi = ngay + "/" + thang + "/" + nam;
+                                        parts[3] = ngayDatPhongMoi;
+                                        System.out.println("Ngay dat nha da cap nhat thanh cong: " + ngayDatPhongMoi);
+                                        sc.nextLine(); 
+                                        break;
+                                    } 
+                                    else {
+                                        System.out.println("Ngay thang nam khong hop le, vui long nhap lai.");
+                                    }
                                 }
-                            }
-                            break;
-                        case 4: 
-                            while(true) {
-                                System.out.println("-----------------------------------");
-                                System.out.println("Vui long nhap lai thoi gian nhan phong");
-                                System.out.print("Nhap ngay: ");
-                                int ngay = sc.nextInt();
-                                System.out.print("Nhap thang: ");
-                                int thang = sc.nextInt();
-                                System.out.print("Nhap nam: ");
-                                int nam = sc.nextInt();
-                                if (KhachHangDat.KiemTraNgayThang(ngay, thang, nam)) {
-                                    String ngayNhanNhaMoi = ngay + "/" + thang + "/" + nam;
-                                    DatNha[i].setNgayNhanNha(ngayNhanNhaMoi);
-                                    System.out.println("Ngay nhan nha da cap nhat thanh cong: " + ngayNhanNhaMoi);
-                                    sc.nextLine();
-                                    break;
+                                break;
+                            case 4: 
+                                while(true) {
+                                    System.out.println("-----------------------------------");
+                                    System.out.println("Vui long nhap lai thoi gian nhan phong");
+                                    System.out.print("Nhap ngay: ");
+                                    int ngay = sc.nextInt();
+                                    System.out.print("Nhap thang: ");
+                                    int thang = sc.nextInt();
+                                    System.out.print("Nhap nam: ");
+                                    int nam = sc.nextInt();
+                                    if (KhachHangDat.KiemTraNgayThang(ngay, thang, nam)) {
+                                        String ngayNhanNhaMoi = ngay + "/" + thang + "/" + nam;
+                                        parts[4] = ngayNhanNhaMoi;
+                                        System.out.println("Ngay nhan nha da cap nhat thanh cong: " + ngayNhanNhaMoi);
+                                        sc.nextLine();
+                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Ngay thang nam khong hop le, vui long nhap lai.");
+                                    }
                                 }
-                                else {
-                                    System.out.println("Ngay thang nam khong hop le, vui long nhap lai.");
+                                break;
+                            case 5: 
+                                while(true) {
+                                    System.out.println("----------------------------------");
+                                    System.out.println("Vui long nhap lai thoi gian tra nha");
+                                    System.out.print("Nhap ngay: ");
+                                    int ngay = sc.nextInt();
+                                    System.out.print("Nhap thang: ");
+                                    int thang = sc.nextInt();
+                                    System.out.print("Nhap nam: ");
+                                    int nam = sc.nextInt();
+                                    if (KhachHangDat.KiemTraNgayThang(ngay, thang, nam)) {
+                                        String ngayTraNhaMoi = ngay + "/" + thang + "/" + nam;
+                                        parts[5] = ngayTraNhaMoi;
+                                        System.out.println("Ngay tra nha da cap nhat thanh cong: " + ngayTraNhaMoi); 
+                                        sc.nextLine();
+                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Ngay thang nam khong hop le, vui long nhap lai.");
+                                    }
                                 }
-                            }
-                        case 5: 
-                            while(true) {
-                                System.out.println("----------------------------------");
-                                System.out.println("Vui long nhap lai thoi gian tra nha");
-                                System.out.print("Nhap ngay: ");
-                                int ngay = sc.nextInt();
-                                System.out.print("Nhap thang: ");
-                                int thang = sc.nextInt();
-                                System.out.print("Nhap nam: ");
-                                int nam = sc.nextInt();
-                                if (KhachHangDat.KiemTraNgayThang(ngay, thang, nam)) {
-                                    String ngayTraNhaMoi = ngay + "/" + thang + "/" + nam;
-                                    DatNha[i].setNgayTraNha(ngayTraNhaMoi);
-                                    System.out.println("Ngay tra nha da cap nhat thanh cong: " + ngayTraNhaMoi); 
-                                    sc.nextLine();
-                                    break;
-                                }
-                                else {
-                                    System.out.println("Ngay thang nam khong hop le, vui long nhap lai.");
-                                }
-                            }
-                        case 6:
-                            System.out.println("Thoat sua thong tin.");
-                            break;
-                        default:
-                            System.out.println("Lua chon khong hop le, vui long thu lai.");
-                    }
-                } while (luachon != 6);
-                break;
+                                break;
+                            case 6:
+                                System.out.println("Thoat sua thong tin.");
+                                break;
+                            default:
+                                System.out.println("Lua chon khong hop le, vui long thu lai.");
+                        }
+                    } while (luachon != 6);
+
+                    // Ghi lại dòng đã sửa
+                    updatedData.append(String.join(", ", parts)).append("\n");
+                } else {
+                    // Giữ lại các dòng không bị xóa
+                    updatedData.append(line).append("\n");
+                }
             }
-        }
-        if (!found) {
-            System.out.println("Khong tim thay ma nha " + MaDatNha);
-        }else {
-            // ------------phần của Đạt ---------------- //
-            GhiThongTinVaoFile("src/input/booking.txt");
+            reader.close();
+
+            // Ghi lại nội dung đã chỉnh sửa
+            BufferedWriter writer = new BufferedWriter(new FileWriter(bookingFile));
+            writer.write(updatedData.toString());
+            writer.close();
             System.out.println("Cap nhat thong tin thanh cong!");
+
+        } catch (IOException e) {
+            System.out.println("Lỗi khi sua file: " + e.getMessage());
         }
     }
+
     // ------------phần của Đạt ---------------- //
     public void GhiThongTinVaoFile(String fileName) {
         try {

@@ -147,3 +147,38 @@ Salary: 1000000 VND
 |------------------------------------------|
 |Tong so tien                              |
 ============================================
+
+===========================
+          HÓA ĐƠN ĐẶT HOMESTAY
+===========================
+
+Mã hóa đơn: INV2024001
+Ngày lập hóa đơn: 29/11/2024
+
+--- Thông tin khách hàng ---
+Họ và tên: Nguyễn Văn A
+Mã khách hàng: KH123
+Số điện thoại: 0901234567
+Email: nguyenvana@gmail.com
+Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM
+
+--- Thông tin homestay ---
+Tên homestay: Homestay Bình An
+Địa chỉ: 456 Đường XYZ, Quận 3, TP.HCM
+Mã nhà: HS456
+Loại phòng: Phòng đôi
+
+--- Thông tin thời gian ---
+Ngày bắt đầu: 12/12/2024
+Ngày kết thúc: 15/12/2024
+Tổng số ngày: 3
+
+--- Chi phí ---
+Giá thuê trên ngày: 500,000 VND
+Tổng chi phí thuê: 1,500,000 VND
+Phí dịch vụ: 200,000 VND
+Tổng tiền thanh toán: 1,700,000 VND
+
+--- Ghi chú ---
+Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi!
+===========================

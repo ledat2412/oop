@@ -1,19 +1,19 @@
-Tiep Tan, 12301, Le Nguyen Duc Dat, 0888239123, ledat241205@gmail.com, 1000000, 24/12/2005, infor cv
-Don Dep, 12302, Tran Van Hung, 0912345678, hungtran@example.com, 800000, 15/08/1995, cleaning cv
-Quan Ly, 12303, Nguyen Thuy Trang, 0987654321, trangnguyen@example.com, 2000000, 20/03/1992, manager cv
-Tiep Tan, 12304, Hoang Van Phuc, 0812345678, phuchoang@example.com, 1000000, 05/11/2000, infor cv
-Don Dep, 12305, Le Thi Hong, 0832123456, hongle@example.com, 850000, 12/09/1998, cleaning cv
-Quan Ly, 12306, Pham Van Cuong, 0856789123, cuongpham@example.com, 2100000, 01/04/1990, manager cv
-Tiep Tan, 12307, Vo Ngoc My, 0901234567, myvo@example.com, 1100000, 28/07/2001, infor cv
-Don Dep, 12308, Nguyen Hong Son, 0876543210, sonnguyen@example.com, 820000, 09/02/1996, cleaning cv
-Quan Ly, 12309, Vu Minh Hoang, 0898765432, hoangvu@example.com, 2200000, 17/01/1988, manager cv
-Tiep Tan, 12310, Tran Van Nam, 0843210987, namtran@example.com, 1000000, 02/03/2002, infor cv
-Don Dep, 12311, Pham Thanh Ha, 0823456712, hathanh@example.com, 830000, 16/07/1997, cleaning cv
-Quan Ly, 12312, Nguyen Minh Anh, 0809123456, annguyen@example.com, 2300000, 12/01/1991, manager cv
-Tiep Tan, 12313, Le Quoc Khanh, 0867891234, khanhle@example.com, 1050000, 11/06/2003, infor cv
-Don Dep, 12314, Vo Thanh Tam, 0890123456, tamvo@example.com, 810000, 18/04/1994, cleaning cv
-Quan Ly, 12315, Tran Hoang Nam, 0832109876, namhoang@example.com, 2400000, 25/08/1985, manager cv
-Tiep Tan, 12316, Nguyen Thu Huong, 0876543901, huongnguyen@example.com, 1080000, 21/09/2001, infor cv
-Don Dep, 12317, Pham Thi Mai, 0856732910, maipham@example.com, 820000, 06/03/1993, cleaning cv
-Quan Ly, 12318, Vu Phuong Dung, 0865432109, dungvu@example.com, 2500000, 14/07/1987, manager cv
+Tiep Tan, 12301, Le Nguyen Duc Dat, 0888239123, ledat241205@gmail.com, 1000000VND, 30/2/2022, infor cv
+Don Dep, 12302, Tran Van Hung, 0912345678, hungtran@example.com, 800000VND, 15/08/1995, cleaning cv
+Quan Ly, 12303, Nguyen Thuy Trang, 0987654321, trangnguyen@example.com, 2000000VND, 20/03/1992, manager cv
+Tiep Tan, 12304, Hoang Van Phuc, 0812345678, phuchoang@example.com, 1000000VND, 05/11/2000, infor cv
+Don Dep, 12305, Le Thi Hong, 0832123456, hongle@example.com, 850000VND, 12/09/1998, cleaning cv
+Quan Ly, 12306, Pham Van Cuong, 0856789123, cuongpham@example.com, 2100000VND, 01/04/1990, manager cv
+Tiep Tan, 12307, Vo Ngoc My, 0901234567, myvo@example.com, 1100000VND, 28/07/2001, infor cv
+Don Dep, 12308, Nguyen Hong Son, 0876543210, sonnguyen@example.com, 82000VND, 09/02/1996, cleaning cv
+Quan Ly, 12309, Vu Minh Hoang, 0898765432, hoangvu@example.com, 2200000VND, 17/01/1988, manager cv
+Tiep Tan, 12310, Tran Van Nam, 0843210987, namtran@example.com, 1000000VND, 02/03/2002, infor cv
+Don Dep, 12311, Pham Thanh Ha, 0823456712, hathanh@example.com, 830000VND, 16/07/1997, cleaning cv
+Quan Ly, 12312, Nguyen Minh Anh, 0809123456, annguyen@example.com, 2300000VND, 12/01/1991, manager cv
+Tiep Tan, 12313, Le Quoc Khanh, 0867891234, khanhle@example.com, 1050000VND, 11/06/2003, infor cv
+Don Dep, 12314, Vo Thanh Tam, 0890123456, tamvo@example.com, 810000VND, 18/04/1994, cleaning cv
+Quan Ly, 12315, Tran Hoang Nam, 0832109876, namhoang@example.com, 2400000VND, 25/08/1985, manager cv
+Tiep Tan, 12316, Nguyen Thu Huong, 0876543901, huongnguyen@example.com, 1080000VND, 21/09/2001, infor cv
+Don Dep, 12317, Pham Thi Mai, 0856732910, maipham@example.com, 820000VND, 06/03/1993, cleaning cv
+Quan Ly, 12318, Vu Phuong Dung, 0865432109, dungvu@example.com, 2500000VND, 14/07/1987, manager cv
 Tiep Tan, 123456789, skibidi, 345, dfgfd, 696969, 342, Tu van: dfgdfg

@@ -34,16 +34,16 @@ public class Readfile {
             }
 
             int indexWidth = 3;
-            int nameWidth = 30;
+            int nameWidth = 27;
             int customerIdWidth = 10;
-            int phoneWidth = 15;
-            int birthDateWidth = 15;
-            int emailWidth = 35;
-            int addressWidth = 25;
+            int phoneWidth = 12;
+            int birthDateWidth = 11;
+            int emailWidth = 30;
+            int addressWidth = 22;
 
             // In header
             System.out.println(String.format("| %-" + indexWidth + "s| %-" + nameWidth + "s| %-" + customerIdWidth + "s| %-" + phoneWidth + "s| %-" + birthDateWidth + "s| %-" + emailWidth + "s| %-" + addressWidth + "s|",
-                    "No.", "Name", "Customer ID", "Phone", "Birth Date", "Email", "Address"));
+                    "No.", "Name", "Client ID", "Phone", "Birth Date", "Email", "Address"));
 
             // In dữ liệu từng khách hàng
             for (int i = 0; i < lineCount; i++) {
